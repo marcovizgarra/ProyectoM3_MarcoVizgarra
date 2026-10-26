@@ -13,3 +13,9 @@ yarn-error.log*
 # SO
 .DS_Store
 Thumbs.db
+
+# Vite build output
+dist/
+
+# VS Code settings
+.vscode/
