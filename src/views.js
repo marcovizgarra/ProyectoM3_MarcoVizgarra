@@ -1,5 +1,3 @@
-
-
 export function renderHome() {
   return `
     <section class="view home-view">

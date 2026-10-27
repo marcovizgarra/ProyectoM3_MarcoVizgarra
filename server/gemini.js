@@ -1,6 +1,6 @@
 import { T800_SYSTEM_PROMPT } from "./t800Prompt.js";
 
-const MODEL = "gemini-3.5-flash-lite";
+const MODEL = "gemini-3.6-flash";
 
 export async function generateT800Reply(messages) {
     const apiKey = process.env.GEMINI_API_KEY;
