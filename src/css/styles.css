@@ -165,3 +165,29 @@ p {
     max-width: 70%;
   }
 }
+
+.typing-indicator {
+  align-self: flex-start;
+  padding: 0.25rem;
+  color: #bfc7cf;
+  font-style: italic;
+}
+
+.chat-error {
+  height: 2.75rem;
+  margin: .5rem;
+  color: #ff3939;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  overflow-y: auto;
+  visibility: hidden;
+}
+
+.chat-error--visible {
+  visibility: visible;
+}
+
+.chat-form button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
