@@ -13,13 +13,13 @@ export function initRouter(container) {
     function render() {
         let path = window.location.pathname;
 
+        if (path === "/") {
+            path = "/home";
+            history.replaceState(null, "", "/home");
+        }
+
         const renderView = routes[path] ?? renderNotFound;
         container.innerHTML = renderView();
-
-        if (path === "/") {
-            history.replaceState(null, "", "/home");
-            path = "/home";
-        }
 
         if (path === "/chat") {
             initChat(container);
