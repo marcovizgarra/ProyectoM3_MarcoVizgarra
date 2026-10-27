@@ -1,8 +1,35 @@
+/* ESTILOS GENERALES */
 
 :root {
-  font-family: Arial, Helvetica, sans-serif;
-  color: #e8edf2;
-  background-color: #10151c;
+  font-family: "Inter", sans-serif;
+  color: white;
+}
+
+h1,
+h2,
+h3,
+.brand,
+.site-header nav,
+.button,
+.chat-form button,
+.home-feature__number {
+  font-family: "Rajdhani", sans-serif;
+  font-weight: 700;
+}
+
+h1 {
+  letter-spacing: 0.02em;
+}
+
+.eyebrow {
+  font-family: "Rajdhani", sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.15rem;
+}
+
+.chat-messages,
+.chat-form input {
+  font-family: "Inter", sans-serif;
 }
 
 * {
@@ -10,30 +37,23 @@
 }
 
 body {
+  display: flex;
+  flex-direction: column;
   margin: 0;
   min-height: 100vh;
+  background-color: #10151c;
+  background-image:
+    radial-gradient(ellipse at 15% 25%,
+      rgba(160, 35, 40, 0.16),
+      transparent 55%),
+    radial-gradient(ellipse at 85% 80%,
+      rgba(45, 85, 110, 0.12),
+      transparent 55%);
+  background-attachment: fixed;
 }
 
-.site-header {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  padding: 1.5rem;
-  border-bottom: 1px solid #39424c;
-}
-
-.brand {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #e34b4b;
-}
-
-nav {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
+p {
+  line-height: 1.7;
 }
 
 a {
@@ -43,29 +63,6 @@ a {
 
 a:hover {
   color: #e34b4b;
-}
-
-main {
-  padding: 2rem 1.5rem;
-}
-
-.view {
-  max-width: 750px;
-  margin: 2rem auto;
-}
-
-h1 {
-  font-size: 2rem;
-}
-
-p {
-  line-height: 1.7;
-}
-
-.eyebrow {
-  color: #e34b4b;
-  font-weight: bold;
-  letter-spacing: 0.15rem;
 }
 
 .button {
@@ -82,26 +79,112 @@ p {
   color: white;
 }
 
-@media (min-width: 768px) {
-  .site-header {
-    padding: 1.5rem 3rem;
-  }
+/* 2. HEADER Y NAVEGACIÓN */
 
-  main {
-    padding: 4rem 2rem;
-  }
-
-  h1 {
-    font-size: 3rem;
-  }
+.site-header {
+  width: 100%;
+  padding: 1.5rem;
+  border-bottom: 1px solid #39424c;
 }
 
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+}
+
+.brand__logo {
+  display: block;
+  width: 280px;
+  height: auto;
+  object-fit: contain;
+}
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.site-header nav a {
+  padding-bottom: 0.4rem;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.site-header nav a.active {
+  color: #e34b4b;
+  border-bottom-color: #e34b4b;
+}
+
+/* ESTRUCTURA Y VISTAS */
+
+main {
+  flex: 1;
+  width: 100%;
+  padding: 2rem 1.5rem;
+}
+
+.view {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Vistas informativas: Inicio, Acerca de y 404 */
+
+.view:not(.chat-view) {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.view:not(.chat-view)>p {
+  max-width: 720px;
+  margin: 0;
+}
+
+.view:not(.chat-view)>h1 {
+  margin: 0;
+}
+
+.view:not(.chat-view)>.button {
+  margin-top: 0.5rem;
+}
+
+/* 4. VISTA DEL CHAT */
+
+.chat-view {
+  max-width: 1200px;
+}
+
+.chat-page-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
 
 .chat-layout {
   display: flex;
   flex-direction: column;
   height: 65vh;
   min-height: 350px;
+}
+
+.chat-page-layout .chat-layout {
+  flex: 1;
+  min-width: 0;
 }
 
 .chat-messages {
@@ -135,6 +218,13 @@ p {
   border-left: 3px solid #e34b4b;
 }
 
+.typing-indicator {
+  align-self: flex-start;
+  padding: 0.25rem;
+  color: #bfc7cf;
+  font-style: italic;
+}
+
 .chat-form {
   display: flex;
   gap: 0.5rem;
@@ -160,17 +250,9 @@ p {
   cursor: pointer;
 }
 
-@media (min-width: 768px) {
-  .message {
-    max-width: 70%;
-  }
-}
-
-.typing-indicator {
-  align-self: flex-start;
-  padding: 0.25rem;
-  color: #bfc7cf;
-  font-style: italic;
+.chat-form button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .chat-error {
@@ -187,7 +269,704 @@ p {
   visibility: visible;
 }
 
-.chat-form button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
+/* 5. PERFIL T-800 */
+
+.t800-profile {
+  display: flex;
+  flex-direction: column;
+}
+
+.t800-profile__image {
+  width: 100%;
+  height: 220px;
+  flex-shrink: 0;
+  background-color: #777;
+}
+
+.t800-profile__info {
+  padding: 1rem;
+}
+
+.t800-profile__info h2 {
+  margin: 0;
+}
+
+.t800-profile__info .eyebrow {
+  margin-top: 0.5rem;
+}
+
+.t800-profile__details>div {
+  margin-bottom: 0.75rem;
+}
+
+.t800-profile__details dt {
+  font-weight: bold;
+}
+
+.t800-profile__details dd {
+  margin: 0;
+}
+
+/* 6. FOOTER Y REDES SOCIALES */
+
+.site-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-top: 1px solid #39424c;
+  flex-shrink: 0;
+}
+
+.footer-logo {
+  display: block;
+  width: 220px;
+  height: auto;
+  object-fit: contain;
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.footer-credits {
+  margin: 0;
+  color: #bfc7cf;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.social-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+}
+
+.social-links a {
+  display: inline-flex;
+  align-items: center;
+}
+
+.social-links img {
+  display: block;
+  width: 100px;
+  height: auto;
+  transition: filter 0.2s ease,
+    transform 0.2s ease;
+}
+
+.social-links a:hover img,
+.social-links a:focus-visible img {
+  filter: brightness(0) saturate(100%) invert(41%) sepia(79%) saturate(955%) hue-rotate(317deg) brightness(100%) contrast(93%);
+}
+
+/* 7. HOME */
+
+.view.home-view {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  gap: 0.75rem;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+/* Presentación */
+
+.home-intro h1 {
+  margin: 0.25rem 0;
+  font-size: clamp(1.8rem, 3vw, 2.75rem);
+}
+
+.home-intro .eyebrow {
+  margin: 0;
+}
+
+.home-intro__logo {
+  display: block;
+  width: 240px;
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.home-lead {
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Banner */
+
+.home-banner {
+  display: block;
+  width: 100%;
+  height: clamp(200px, 35dvh, 420px);
+  object-fit: cover;
+  object-position: center 25%;
+  flex-shrink: 0;
+  border: 1px solid #39424c;
+  border-radius: 0.5rem;
+}
+
+/* Tarjetas informativas */
+
+.home-features {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.home-feature {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 1rem;
+  background-color: #202933;
+  border: 1px solid #39424c;
+  border-radius: 0.5rem;
+}
+
+.home-feature__number {
+  color: #e34b4b;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.home-feature h2 {
+  margin: 0 0 0.4rem;
+  font-size: 1rem;
+}
+
+.home-feature p {
+  margin: 0;
+  color: #bfc7cf;
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+/* Botón */
+
+.view.home-view>.home-cta {
+  align-self: center;
+  margin: 0;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+/* RESPONSIVE: MOBILE (HASTA 767px) */
+
+@media (max-width: 767px) {
+  /* Estructura general */
+
+  body {
+    height: 100dvh;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .site-header {
+    flex-shrink: 0;
+  }
+
+  main {
+    min-height: 0;
+    padding: 0.75rem;
+    overflow: hidden;
+  }
+
+  .view {
+    height: 100%;
+    min-height: 0;
+  }
+
+  .view:not(.chat-view) {
+    justify-content: flex-start;
+    padding: 1rem 0;
+    overflow-y: auto;
+  }
+
+  /* Header y navegación */
+
+  .site-header__inner {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .brand {
+    justify-content: center;
+  }
+
+  .brand__logo {
+    width: 160px;
+  }
+
+  .site-header nav {
+    justify-content: center;
+    width: 100%;
+    gap: 1.5rem;
+  }
+
+  /* Chat con scroll interno */
+
+  .chat-view {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 0;
+    margin: 0 auto;
+  }
+
+  .chat-page-layout {
+    flex: 1;
+    min-height: 0;
+    gap: 0.75rem;
+  }
+
+  .chat-page-layout .chat-layout {
+    height: auto;
+    min-height: 0;
+  }
+
+  .chat-messages {
+    min-height: 0;
+  }
+
+  .chat-form {
+    padding-top: 0.5rem;
+  }
+
+  .chat-error {
+    height: auto;
+    margin: 0;
+  }
+
+  /* Perfil compacto */
+
+  .t800-profile {
+    flex-direction: row;
+    align-items: center;
+    gap: 0.75rem;
+    flex-shrink: 0;
+  }
+
+  .t800-profile__image {
+    width: 68px;
+    height: 68px;
+  }
+
+  .t800-profile__info {
+    flex: 1;
+    min-width: 0;
+    padding: 0;
+  }
+
+  .t800-profile__info h2 {
+    font-size: 1.1rem;
+  }
+
+  .t800-profile__info .eyebrow {
+    font-size: 0.65rem;
+    margin: 0.25rem 0;
+    letter-spacing: 0.05rem;
+  }
+
+  .t800-profile__info>p:not(.eyebrow) {
+    font-size: 0.75rem;
+    line-height: 1.3;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .t800-profile__details {
+    display: none;
+  }
+
+  /* Footer compacto */
+
+  .site-footer {
+    padding: 0.5rem;
+    gap: 0.4rem;
+    font-size: 0.75rem;
+  }
+
+  .site-footer p {
+    margin: 0 0 0.25rem;
+    line-height: 1.3;
+  }
+
+  .footer-logo {
+    width: 120px;
+  }
+
+  .footer-credits {
+    font-size: 0.7rem;
+  }
+
+  .social-links img {
+    width: 85px;
+  }
+
+  /* Home */
+
+  .view.home-view {
+    justify-content: flex-start;
+    gap: 0.5rem;
+    padding: 0.5rem 0;
+  }
+
+  .home-intro h1 {
+    font-size: 1.5rem;
+  }
+
+  .home-intro__logo {
+    width: 180px;
+  }
+
+  .home-lead {
+    font-size: 0.85rem;
+  }
+
+  .home-banner {
+    height: clamp(110px, 18dvh, 150px);
+    object-position: 62% 25%;
+  }
+
+  .home-features {
+    grid-template-columns: 1fr;
+    gap: 0.4rem;
+  }
+
+  .home-feature {
+    padding: 0.5rem 0.75rem;
+    gap: 0.65rem;
+  }
+
+  .home-feature h2 {
+    font-size: 0.85rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .home-feature p {
+    font-size: 0.75rem;
+    line-height: 1.3;
+  }
+
+  .home-feature__number {
+    font-size: 0.9rem;
+  }
+
+  .view.home-view>.home-cta {
+    width: 100%;
+    padding: 0.75rem;
+  }
+}
+
+/* RESPONSIVE: TABLET Y ESCRITORIO (DESDE 768px) */
+
+@media (min-width: 768px) {
+  .site-header {
+    padding: 1.5rem 3rem;
+  }
+
+  main {
+    padding: 4rem 2rem;
+  }
+
+  h1 {
+    font-size: 3rem;
+  }
+
+  .message {
+    max-width: 70%;
+  }
+
+  .chat-page-layout {
+    flex-direction: row;
+    align-items: stretch;
+  }
+
+  .t800-profile {
+    flex: 0 0 280px;
+  }
+
+  .t800-profile__image {
+    height: 300px;
+  }
+}
+
+/* RESPONSIVE: ESCRITORIO CON ALTURA DESDE 720px */
+
+@media (min-width: 768px) and (min-height: 720px) {
+  body {
+    height: 100dvh;
+    overflow: hidden;
+  }
+
+  .site-header {
+    flex-shrink: 0;
+  }
+
+  main {
+    min-height: 0;
+    padding: 1.5rem 2rem;
+    overflow: hidden;
+  }
+
+  .view {
+    height: 100%;
+    min-height: 0;
+  }
+
+  .chat-view {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 0;
+    margin: 0 auto;
+  }
+
+  .chat-page-layout {
+    flex: 1;
+    min-height: 0;
+  }
+
+  .chat-page-layout .chat-layout {
+    height: auto;
+    min-height: 0;
+  }
+
+  .chat-messages {
+    min-height: 0;
+  }
+
+  .t800-profile__image {
+    width: 260px;
+    height: 260px;
+    object-fit: cover;
+    border: 1px solid #39424c;
+    border-radius: 0.5rem;
+  }
+}
+
+
+/* ABOUT */
+
+.view.about-view {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  gap: 1.25rem;
+
+  height: 100%;
+  min-height: 0;
+  padding: 1rem 0;
+
+  overflow-y: auto;
+}
+
+.view.about-view {
+  width: 100%;
+  max-width: 840px;
+  margin: 0 auto;
+}
+
+.view.about-view::-webkit-scrollbar {
+  display: none;
+}
+
+/* Introducción */
+
+.about-header .eyebrow {
+  margin: 0;
+}
+
+.about-header h1 {
+  margin: 0.25rem 0;
+  font-size: clamp(1.8rem, 3vw, 2.75rem);
+}
+
+.about-description {
+  max-width: 750px;
+  margin: 0;
+  color: #bfc7cf;
+  line-height: 1.5;
+}
+
+/* Tarjetas */
+
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.about-card {
+  padding: 1.25rem;
+  background-color: #202933;
+  border: 1px solid #39424c;
+  border-radius: 0.5rem;
+}
+
+.about-card__number {
+  color: #e34b4b;
+  font-family: "Rajdhani", sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.about-card h2 {
+  margin: 0.4rem 0;
+  font-size: 1.25rem;
+}
+
+.about-card p {
+  margin: 0;
+  color: #bfc7cf;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+/* Tecnologías */
+
+.about-technologies {
+  width: 70%;
+  align-self: center;
+  margin-block: 2rem;
+}
+
+.about-technologies h2 {
+  margin: 0 0 2rem;
+  color: #e34b4b;
+  letter-spacing: .2rem;
+  border-bottom: 2px solid #b93030;
+  font-size: 1.15rem;
+  text-align: center;
+}
+
+.about-tech-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+  justify-items: center;
+  align-items: start;
+}
+
+.about-tech-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  text-align: center;
+}
+
+.about-tech-icon {
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+  display: block;
+}
+
+.about-tech-icon--light {
+  filter: invert(1);
+}
+
+.about-tech-item span {
+  font-size: 0.8rem;
+  color: #bfc7cf;
+  line-height: 1.3;
+}
+
+/* Enlaces */
+
+.about-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.about-actions .button {
+  margin: 0;
+}
+
+.about-source {
+  display: inline-block;
+  padding: 0.9rem 1.4rem;
+  border: 1px solid #39424c;
+  border-radius: 0.4rem;
+  transition: border-color 0.2s ease,
+              color 0.2s ease;
+}
+
+.about-source:hover {
+  color: #e34b4b;
+  border-color: #e34b4b;
+}
+
+/* Mobile */
+
+@media (max-width: 767px) {
+  .view.about-view {
+    gap: 0.75rem;
+    padding: 0.5rem 0;
+  }
+
+  .about-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .about-description {
+    font-size: 0.85rem;
+  }
+
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
+  .about-card {
+    padding: 0.75rem;
+  }
+
+  .about-card h2 {
+    font-size: 1rem;
+  }
+
+  .about-card p {
+    font-size: 0.8rem;
+  }
+
+  .about-technologies {
+    padding: 0.75rem;
+  }
+
+  .about-actions {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .about-actions a {
+    width: 100%;
+    text-align: center;
+  }
+
+  .about-disclaimer {
+    font-size: 0.7rem;
+  }
 }

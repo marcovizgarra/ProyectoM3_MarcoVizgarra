@@ -1,26 +1,68 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>T-800 | Chat interactivo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="./public/img/t800_favicon.png" type="image">
     <link rel="stylesheet" href="/src/css/styles.css">
 </head>
+
 <body>
     <header class="site-header">
-        <a href="/home" data-link class="brand">T-800</a>
+        <div class="site-header__inner">
 
-        <nav aria-label="Navegación principal">
-            <a href="/home" data-link>Inicio</a>
-            <a href="/chat" data-link>Chat</a>
-            <a href="/about" data-link>Acerca de</a>
-        </nav>
+            <a href="/home" data-link class="brand">
+                <img src="/img/T800_logo.png" alt="T-800 Terminator" class="brand__logo" />
+            </a>
+
+            <nav aria-label="Navegación principal">
+                <a href="/home" data-link>INICIO</a>
+                <a href="/chat" data-link>CHAT</a>
+                <a href="/about" data-link>ACERCA DE</a>
+            </nav>
+
+        </div>
     </header>
 
     <main id="app">
-
     </main>
+
+
+    <footer class="site-footer">
+
+        <img src="/img/cyberdyne_systems_logo.png" alt="Cyberdyne Systems" class="footer-logo" />
+
+        <div class="footer-content">
+
+            <p class="footer-credits">
+                © 2026 Cyberdyne Terminal |
+                Proyecto Integrador M3 |
+                Marco Vizgarra
+            </p>
+
+            <nav class="social-links" aria-label="Redes profesionales">
+
+                <a href="https://github.com/marcovizgarra" target="_blank" rel="noopener noreferrer"
+                    aria-label="GitHub de Marco Vizgarra">
+                    <img src="/img/icons/gitHub_lockup_white.svg" alt="" />
+                </a>
+
+                <a href="https://www.linkedin.com/in/marco-vizgarra/" target="_blank" rel="noopener noreferrer"
+                    aria-label="LinkedIn de Marco Vizgarra">
+                    <img src="/img/icons/linkedin_svgrepo.svg" alt="" />
+                </a>
+
+            </nav>
+        </div>
+
+    </footer>
 
     <script src="./src/app.js" type="module"></script>
 </body>
+
 </html>

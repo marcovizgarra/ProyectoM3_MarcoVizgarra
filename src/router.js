@@ -18,13 +18,29 @@ export function initRouter(container) {
             history.replaceState(null, "", "/home");
         }
 
+        const navLinks = document.querySelectorAll(
+            ".site-header nav a[data-link]"
+        );
+
+        navLinks.forEach((link) => {
+            const isActive = link.getAttribute("href") === path;
+
+            link.classList.toggle("active", isActive);
+
+            if (isActive) {
+                link.setAttribute("aria-current", "page");
+            } else {
+                link.removeAttribute("aria-current");
+            }
+        });
+
         const renderView = routes[path] ?? renderNotFound;
         container.innerHTML = renderView();
 
         if (path === "/chat") {
             initChat(container);
         }
-  }
+    }
 
     document.addEventListener("click", (event) => {
         if (!(event.target instanceof Element)) return;

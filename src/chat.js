@@ -8,40 +8,89 @@ const chatState = {
 
 let chatElements = null;
 
+
 export function renderChat() {
   return `
     <section class="view chat-view">
-      <h1>Terminal T-800</h1>
+      <div class="chat-page-layout">
+        <aside class="t800-profile"
+               aria-labelledby="t800-profile-title">
 
-      <div class="chat-layout">
-        <div
-          id="chat-messages"
-          class="chat-messages"
-          role="log"
-          aria-label="Conversación"
-          aria-live="polite"
-        ></div>
-
-        <form id="chat-form" class="chat-form">
-          <input
-            id="chat-input"
-            type="text"
-            placeholder="Escribí tu mensaje..."
-            autocomplete="off"
-            maxlength="500"
-            required
+          <img
+            class="t800-profile__image"
+            src="/img/T800_avatar.jpg"
+            alt="Retrato del T-800 de Terminator 2"
+            width="260"
+            height="260"
           />
-          <button id="send-button" type="submit">
-            Enviar
-          </button>
-        </form>
 
-        <p id="chat-error" class="chat-error"
-           role="alert"></p>
+          
+          <div class="t800-profile__info">
+            <h2 id="t800-profile-title">Terminal T-800</h2>
+
+            <p class="eyebrow">CYBERDYNE SYSTEMS</p>
+
+            <p>
+              Organismo cibernético de Terminator 2:
+              Reprogramado para proteger a John Connor.
+            </p>
+
+            <dl class="t800-profile__details">
+              <div>
+                <dt>Serie</dt>
+                <dd>T-800</dd>
+              </div>
+
+              <div>
+                <dt>Modelo</dt>
+                <dd>Cyberdyne Systems Model 101</dd>
+              </div>
+
+              <div>
+                <dt>Misión</dt>
+                <dd>Proteger a John Connor</dd>
+              </div>
+            </dl>
+          </div>
+
+        </aside>
+
+        <div class="chat-layout">
+          <div
+            id="chat-messages"
+            class="chat-messages"
+            role="log"
+            aria-label="Conversación"
+            aria-live="polite"
+          ></div>
+
+          <form id="chat-form" class="chat-form">
+            <input
+              id="chat-input"
+              type="text"
+              placeholder="Escribí tu mensaje..."
+              autocomplete="off"
+              maxlength="500"
+              required
+            />
+
+            <button id="send-button" type="submit">
+              Enviar
+            </button>
+          </form>
+
+          <p
+            id="chat-error"
+            class="chat-error"
+            role="alert"
+          ></p>
+        </div>
+
       </div>
     </section>
   `;
 }
+
 
 function renderMessages() {
   const { messagesContainer } = chatElements;
@@ -124,7 +173,7 @@ async function handleSubmit(event) {
   try {
     const history = chatState.messages
       .filter((message) => !message.failed)
-      .slice(-20)
+      .slice(-21)
       .map(({ role, text }) => ({ role, text }));
 
     const reply = await getChatReply(history);
