@@ -124,7 +124,7 @@ async function handleSubmit(event) {
   try {
     const history = chatState.messages
       .filter((message) => !message.failed)
-      .slice(-8)
+      .slice(-9)
       .map(({ role, text }) => ({ role, text }));
 
     const reply = await getChatReply(history);
