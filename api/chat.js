@@ -46,8 +46,19 @@ export default {
         } catch (error) {
             console.error("Error al generar la respuesta:", error);
 
+            if (error.status === 429) {
+                return Response.json(
+                    {
+                        error: "Los sistemas de comunicación de Cyberdyne han alcanzado su límite operativo diario. Intentá nuevamente más tarde."
+                    },
+                    { status: 429 }
+                );
+            }
+
             return Response.json(
-                { error: "No se pudo generar la respuesta. Intentá nuevamente." },
+                {
+                    error: "No se pudo generar la respuesta. Intentá nuevamente."
+                },
                 { status: 502 }
             );
         }
