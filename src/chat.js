@@ -1,5 +1,8 @@
 import { getChatReply } from "./services/chatApi.js";
 
+const T800_MESSAGE_AVATAR_URL = "/img/t-800_message_avatar.png";
+const PROCESSING_DELAY_MS = 3200;
+
 const chatState = {
   messages: [],
   status: "idle",
@@ -7,6 +10,10 @@ const chatState = {
 };
 
 let chatElements = null;
+
+function isResponding() {
+  return chatState.status === "loading" || chatState.status === "processing";
+}
 
 
 export function renderChat() {
@@ -16,17 +23,35 @@ export function renderChat() {
         <aside class="t800-profile"
                aria-labelledby="t800-profile-title">
 
-          <img
-            class="t800-profile__image"
-            src="/img/T800_avatar.jpg"
-            alt="Retrato del T-800 de Terminator 2"
-            width="260"
-            height="260"
-          />
+          <div class="t800-profile__avatar">
+            <div class="t800-profile__crop">
+              <img
+                class="t800-profile__image"
+                src="/img/T800_avatar.jpg"
+                alt="Retrato del T-800 de Terminator 2"
+                width="260"
+                height="260"
+              />
+            </div>
+            <span
+              class="online-status online-status--avatar"
+              role="img"
+              aria-label="Conectado"
+              title="Online"
+            ></span>
+          </div>
 
-          
           <div class="t800-profile__info">
-            <h2 id="t800-profile-title">Terminal T-800</h2>
+            <div class="t800-profile__heading">
+              <h2 id="t800-profile-title">Terminal T-800</h2>
+              <span
+                class="online-status online-status--desktop"
+                role="img"
+                aria-label="Conectado"
+                tabindex="0"
+                data-tooltip="Online"
+              ></span>
+            </div>
 
             <p class="eyebrow">CYBERDYNE SYSTEMS</p>
 
@@ -99,22 +124,46 @@ function renderMessages() {
 
   for (const message of chatState.messages) {
     const bubble = document.createElement("div");
-
-    bubble.classList.add(
-      "message",
-      `message--${message.role}`
-    );
-
+    bubble.classList.add("message", "message--" + message.role);
     bubble.textContent = message.text;
-    messagesContainer.append(bubble);
+
+    if (message.role === "assistant") {
+      const row = document.createElement("div");
+      row.classList.add("message-row", "message-row--assistant");
+
+      const avatar = document.createElement("img");
+      avatar.className = "message-avatar";
+      avatar.src = T800_MESSAGE_AVATAR_URL;
+      avatar.alt = "";
+      avatar.width = 28;
+      avatar.height = 28;
+
+      row.append(avatar, bubble);
+      messagesContainer.append(row);
+    } else {
+      messagesContainer.append(bubble);
+    }
   }
 
-  if (chatState.status === "loading") {
+  if (isResponding()) {
     const indicator = document.createElement("div");
-
     indicator.classList.add("typing-indicator");
-    indicator.textContent = "T-800 está escribiendo...";
+    indicator.setAttribute("role", "status");
 
+    if (chatState.status === "processing") {
+      const spinner = document.createElement("span");
+      spinner.className = "typing-indicator__spinner";
+      spinner.setAttribute("aria-hidden", "true");
+      indicator.append(spinner);
+    }
+
+    const label = document.createElement("span");
+    label.className = "typing-indicator__label";
+    label.textContent = chatState.status === "processing"
+      ? "Procesando..."
+      : "T-800 está escribiendo...";
+
+    indicator.append(label);
     messagesContainer.append(indicator);
   }
 
@@ -125,7 +174,7 @@ function renderChatUI() {
   if (!chatElements?.messagesContainer.isConnected) return;
 
   const { input, button, errorContainer } = chatElements;
-  const isLoading = chatState.status === "loading";
+  const isLoading = isResponding();
 
   renderMessages();
 
@@ -144,7 +193,7 @@ function renderChatUI() {
 async function handleSubmit(event) {
   event.preventDefault();
 
-  if (chatState.status === "loading") return;
+  if (isResponding()) return;
 
   const { input } = chatElements;
   const text = input.value.trim();
@@ -170,6 +219,14 @@ async function handleSubmit(event) {
   input.value = "";
   renderChatUI();
 
+  // La API devuelve la respuesta completa; usamos la demora, no su extensión.
+  const processingTimer = window.setTimeout(() => {
+    if (chatState.status === "loading") {
+      chatState.status = "processing";
+      renderChatUI();
+    }
+  }, PROCESSING_DELAY_MS);
+
   try {
     const history = chatState.messages
       .filter((message) => !message.failed)
@@ -193,6 +250,7 @@ async function handleSubmit(event) {
         ? error.message
         : "Ocurrió un error inesperado.";
   } finally {
+    window.clearTimeout(processingTimer);
     renderChatUI();
 
     if (chatElements?.input.isConnected) {
