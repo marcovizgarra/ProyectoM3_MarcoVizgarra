@@ -5,6 +5,28 @@
   color: white;
 }
 
+* {
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  height: 100dvh;
+  min-height: 0;
+  overflow: hidden;
+  background-color: #10151c;
+  background-image:
+    radial-gradient(ellipse at 15% 25%,
+      rgba(160, 35, 40, 0.16),
+      transparent 55%),
+    radial-gradient(ellipse at 85% 80%,
+      rgba(45, 85, 110, 0.12),
+      transparent 55%);
+  background-attachment: fixed;
+}
+
 h1,
 h2,
 h3,
@@ -21,37 +43,6 @@ h1 {
   letter-spacing: 0.02em;
 }
 
-.eyebrow {
-  font-family: "Rajdhani", sans-serif;
-  font-weight: 700;
-  letter-spacing: 0.15rem;
-}
-
-.chat-messages,
-.chat-form input {
-  font-family: "Inter", sans-serif;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-body {
-  display: flex;
-  flex-direction: column;
-  margin: 0;
-  min-height: 100vh;
-  background-color: #10151c;
-  background-image:
-    radial-gradient(ellipse at 15% 25%,
-      rgba(160, 35, 40, 0.16),
-      transparent 55%),
-    radial-gradient(ellipse at 85% 80%,
-      rgba(45, 85, 110, 0.12),
-      transparent 55%);
-  background-attachment: fixed;
-}
-
 p {
   line-height: 1.7;
 }
@@ -63,6 +54,12 @@ a {
 
 a:hover {
   color: #e34b4b;
+}
+
+.eyebrow {
+  font-family: "Rajdhani", sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.15rem;
 }
 
 .button {
@@ -79,12 +76,13 @@ a:hover {
   color: white;
 }
 
-/* 2. HEADER Y NAVEGACIÓN */
+/* HEADER Y NAVEGACIÓN */
 
 .site-header {
+  position: relative;
+  flex-shrink: 0;
   width: 100%;
   padding: 1.5rem;
-  position: relative;
 }
 
 .site-header::after {
@@ -107,10 +105,11 @@ a:hover {
 
 .site-header__inner {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 0.75rem;
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
@@ -119,11 +118,12 @@ a:hover {
 .brand {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
 }
 
 .brand__logo {
   display: block;
-  width: 280px;
+  width: 160px;
   height: auto;
   object-fit: contain;
 }
@@ -132,6 +132,12 @@ nav {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
+}
+
+.site-header nav {
+  justify-content: center;
+  width: 100%;
+  gap: 1.5rem;
 }
 
 .site-header nav a {
@@ -150,70 +156,84 @@ nav {
 main {
   flex: 1;
   width: 100%;
-  padding: 2rem 1.5rem;
+  min-height: 0;
+  padding: 0.75rem;
+  overflow: hidden;
 }
 
 .view {
   width: 100%;
   max-width: 1200px;
+  height: 100%;
+  min-height: 0;
   margin: 0 auto;
 }
 
-/* Vistas informativas: Inicio, Acerca de y 404 */
-
+/* Home, About y 404 comparten la estructura informativa. */
 .view:not(.chat-view) {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  justify-content: flex-start;
   gap: 1rem;
+  padding: 1rem 0;
+  overflow-y: auto;
 }
 
-.view:not(.chat-view)>p {
+.view:not(.chat-view) > p {
   max-width: 720px;
   margin: 0;
 }
 
-.view:not(.chat-view)>h1 {
+.view:not(.chat-view) > h1 {
   margin: 0;
 }
 
-.view:not(.chat-view)>.button {
+.view:not(.chat-view) > .button {
   margin-top: 0.5rem;
 }
 
-/* 4. VISTA DEL CHAT */
+/* CHAT: HISTORIAL, MENSAJES Y FORMULARIO */
 
 .chat-view {
-  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  margin: 0 auto;
 }
 
 .chat-page-layout {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  flex: 1;
+  min-height: 0;
+  gap: 0.75rem;
 }
 
 .chat-layout {
   display: flex;
   flex-direction: column;
-  height: 65vh;
-  min-height: 350px;
 }
 
 .chat-page-layout .chat-layout {
   flex: 1;
   min-width: 0;
+  height: auto;
+  min-height: 0;
 }
 
 .chat-messages {
   display: flex;
   flex-direction: column;
   flex: 1;
+  min-height: 0;
   gap: 1rem;
   overflow-y: auto;
   padding: 1rem;
   border: 1px solid #39424c;
   border-radius: 0.5rem;
+  font-family: "Inter", sans-serif;
 }
 
 .message {
@@ -295,7 +315,7 @@ main {
 .chat-form {
   display: flex;
   gap: 0.5rem;
-  padding-top: 1rem;
+  padding-top: 0.5rem;
 }
 
 .chat-form input {
@@ -306,6 +326,7 @@ main {
   background-color: #202933;
   border: 1px solid #39424c;
   border-radius: 0.4rem;
+  font-family: "Inter", sans-serif;
 }
 
 .chat-form button {
@@ -323,8 +344,8 @@ main {
 }
 
 .chat-error {
-  height: 2.75rem;
-  margin: .5rem;
+  height: auto;
+  margin: 0;
   color: #ff3939;
   font-size: 0.9rem;
   line-height: 1.4;
@@ -336,24 +357,28 @@ main {
   visibility: visible;
 }
 
-/* 5. PERFIL T-800 */
+/* PERFIL T-800: VERSIÓN MÓVIL COMPACTA */
 
 .t800-profile {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 0.75rem;
 }
 
 .t800-profile__avatar {
   position: relative;
-  width: 100%;
-  height: 220px;
-  flex-shrink: 0;
+  flex: 0 0 68px;
+  width: 68px;
+  height: 68px;
 }
 
 .t800-profile__crop {
   width: 100%;
   height: 100%;
   overflow: hidden;
+  border-radius: 50%;
 }
 
 .t800-profile__image {
@@ -361,7 +386,10 @@ main {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: right top;
   background-color: #777;
+  transform: scale(1.40);
+  transform-origin: right top;
 }
 
 .t800-profile__heading {
@@ -390,8 +418,19 @@ main {
   animation: online-blink 1.5s ease-in-out infinite;
 }
 
-.online-status--avatar {
+.online-status--desktop {
   display: none;
+}
+
+.online-status--avatar {
+  position: absolute;
+  right: 1px;
+  bottom: 1px;
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  border: 2px solid #10151c;
+  background: #10151c;
 }
 
 .online-status--desktop::after {
@@ -431,19 +470,39 @@ main {
 }
 
 .t800-profile__info {
-  padding: 1rem;
+  flex: 1;
+  min-width: 0;
+  padding: 0;
 }
 
 .t800-profile__info h2 {
   margin: 0;
+  font-size: 1.1rem;
 }
 
 .t800-profile__info .eyebrow {
-  margin-top: 0.5rem;
+  margin: 0.25rem 0;
   color: #e34b4b;
+  font-size: 0.65rem;
+  letter-spacing: 0.05rem;
 }
 
-.t800-profile__details>div {
+.t800-profile__info > p:not(.eyebrow) {
+  display: -webkit-box;
+  margin: 0;
+  overflow: hidden;
+  font-size: 0.75rem;
+  line-height: 1.3;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+}
+
+.t800-profile__details {
+  display: none;
+}
+
+.t800-profile__details > div {
   margin-bottom: 0.75rem;
 }
 
@@ -455,23 +514,29 @@ main {
   margin: 0;
 }
 
-/* 6. FOOTER Y REDES SOCIALES */
+/* FOOTER Y REDES SOCIALES */
 
 .site-footer {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
-  width: 100%;
-  padding: 0.75rem 1rem;
-  border-top: 1px solid #39424c;
   flex-shrink: 0;
+  gap: 0.4rem;
+  width: 100%;
+  padding: 0.5rem;
+  border-top: 1px solid #39424c;
+  font-size: 0.75rem;
+}
+
+.site-footer p {
+  margin: 0 0 0.25rem;
+  line-height: 1.3;
 }
 
 .footer-logo {
   display: block;
-  width: 220px;
+  width: 120px;
   height: auto;
   object-fit: contain;
 }
@@ -487,7 +552,7 @@ main {
 .footer-credits {
   margin: 0;
   color: #bfc7cf;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   line-height: 1.4;
   text-align: center;
 }
@@ -506,10 +571,9 @@ main {
 
 .social-links img {
   display: block;
-  width: 100px;
+  width: 85px;
   height: auto;
-  transition: filter 0.2s ease,
-    transform 0.2s ease;
+  transition: filter 0.2s ease, transform 0.2s ease;
 }
 
 .social-links a:hover img,
@@ -517,23 +581,23 @@ main {
   filter: brightness(0) saturate(100%) invert(41%) sepia(79%) saturate(955%) hue-rotate(317deg) brightness(100%) contrast(93%);
 }
 
-/* 7. HOME */
+/* HOME */
 
 .view.home-view {
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  justify-content: center;
-  gap: 0.75rem;
+  justify-content: flex-start;
+  gap: 0.5rem;
   min-height: 0;
+  padding: 0.5rem 0;
   overflow-y: auto;
 }
 
 /* Presentación */
-
 .home-intro h1 {
   margin: 0.25rem 0;
-  font-size: clamp(1.8rem, 3vw, 2.75rem);
+  font-size: 1.5rem;
 }
 
 .home-intro .eyebrow {
@@ -543,7 +607,7 @@ main {
 
 .home-intro__logo {
   display: block;
-  width: 240px;
+  width: 180px;
   max-width: 100%;
   height: auto;
   object-fit: contain;
@@ -551,35 +615,34 @@ main {
 
 .home-lead {
   margin: 0;
+  font-size: 0.85rem;
   line-height: 1.5;
 }
 
 /* Banner */
-
 .home-banner {
   display: block;
-  width: 100%;
-  height: clamp(200px, 35dvh, 420px);
-  object-fit: cover;
-  object-position: center 25%;
   flex-shrink: 0;
+  width: 100%;
+  height: clamp(110px, 18dvh, 150px);
+  object-fit: cover;
+  object-position: 62% 25%;
   border: 1px solid #39424c;
   border-radius: 0.5rem;
 }
 
 /* Tarjetas informativas */
-
 .home-features {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1rem;
+  grid-template-columns: 1fr;
+  gap: 0.4rem;
 }
 
 .home-feature {
   display: flex;
   align-items: flex-start;
-  gap: 0.75rem;
-  padding: 1rem;
+  gap: 0.65rem;
+  padding: 0.5rem 0.75rem;
   background-color: #202933;
   border: 1px solid #39424c;
   border-radius: 0.5rem;
@@ -587,283 +650,261 @@ main {
 
 .home-feature__number {
   color: #e34b4b;
+  font-size: 0.9rem;
   font-weight: bold;
-  font-size: 1.1rem;
 }
 
 .home-feature h2 {
-  margin: 0 0 0.4rem;
-  font-size: 1rem;
+  margin: 0 0 0.2rem;
+  font-size: 0.85rem;
 }
 
 .home-feature p {
   margin: 0;
   color: #bfc7cf;
-  font-size: 0.85rem;
-  line-height: 1.4;
+  font-size: 0.75rem;
+  line-height: 1.3;
 }
 
-/* Botón */
-
-.view.home-view>.home-cta {
+/* Botón de acceso al chat */
+.view.home-view > .home-cta {
   align-self: center;
+  flex-shrink: 0;
+  width: 100%;
+  padding: 0.75rem;
   margin: 0;
   text-align: center;
-  flex-shrink: 0;
 }
 
-/* RESPONSIVE: MOBILE (HASTA 767px) */
+/* ABOUT */
 
-@media (max-width: 767px) {
-  /* Estructura general */
+.view.about-view {
+  align-items: stretch;
+  justify-content: flex-start;
+  gap: 0.75rem;
+  width: 100%;
+  max-width: 840px;
+  height: 100%;
+  min-height: 0;
+  padding: 0.5rem 0;
+  margin: 0 auto;
+  overflow-y: auto;
+}
 
+.view.about-view::-webkit-scrollbar {
+  display: none;
+}
+
+/* Introducción */
+.about-header .eyebrow {
+  margin: 0;
+}
+
+.about-header h1 {
+  margin: 0.25rem 0;
+  font-size: 1.5rem;
+}
+
+.about-description {
+  max-width: 750px;
+  margin: 0;
+  color: #bfc7cf;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+/* Tarjetas */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
+}
+
+.about-card {
+  padding: 0.75rem;
+  background-color: #202933;
+  border: 1px solid #39424c;
+  border-radius: 0.5rem;
+}
+
+.about-card__number {
+  color: #e34b4b;
+  font-family: "Rajdhani", sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.about-card h2 {
+  margin: 0.4rem 0;
+  font-size: 1rem;
+}
+
+.about-card p {
+  margin: 0;
+  color: #bfc7cf;
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+/* Tecnologías */
+.about-technologies {
+  width: 70%;
+  align-self: center;
+  padding: 0.75rem;
+  margin-block: 2rem;
+}
+
+.about-technologies h2 {
+  margin: 0 0 2rem;
+  color: #e34b4b;
+  letter-spacing: 0.2rem;
+  border-bottom: 2px solid #b93030;
+  font-size: 1.15rem;
+  text-align: center;
+}
+
+.about-tech-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+  justify-items: center;
+  align-items: start;
+}
+
+.about-tech-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  text-align: center;
+}
+
+.about-tech-icon {
+  display: block;
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+}
+
+.about-tech-icon--light {
+  filter: invert(1);
+}
+
+.about-tech-item span {
+  color: #bfc7cf;
+  font-size: 0.8rem;
+  line-height: 1.3;
+}
+
+/* Enlaces */
+.about-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.about-actions .button {
+  margin: 0;
+}
+
+.about-actions a {
+  width: 100%;
+  text-align: center;
+}
+
+.about-source {
+  display: inline-block;
+  padding: 0.9rem 1.4rem;
+  border: 1px solid #39424c;
+  border-radius: 0.4rem;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.about-source:hover {
+  color: #e34b4b;
+  border-color: #e34b4b;
+}
+
+/* TABLET Y ESCRITORIO: ADAPTACIONES PROGRESIVAS */
+
+@media (min-width: 768px) {
+  /* Estructura: en pantallas bajas se conserva el scroll de página. */
   body {
-    height: 100dvh;
-    min-height: 0;
-    overflow: hidden;
-  }
-
-  .site-header {
-    flex-shrink: 0;
+    height: auto;
+    min-height: 100vh;
+    overflow: visible;
   }
 
   main {
-    min-height: 0;
-    padding: 0.75rem;
-    overflow: hidden;
+    min-height: auto;
+    padding: 4rem 2rem;
+    overflow: visible;
   }
 
   .view {
-    height: 100%;
-    min-height: 0;
+    height: auto;
+    min-height: auto;
   }
 
   .view:not(.chat-view) {
-    justify-content: flex-start;
-    padding: 1rem 0;
-    overflow-y: auto;
-  }
-
-  /* Header y navegación */
-
-  .site-header__inner {
-    flex-direction: column;
-    align-items: center;
-    gap: 0.75rem;
-  }
-
-  .brand {
-    justify-content: center;
-  }
-
-  .brand__logo {
-    width: 160px;
-  }
-
-  .site-header nav {
-    justify-content: center;
-    width: 100%;
-    gap: 1.5rem;
-  }
-
-  /* Chat con scroll interno */
-
-  .chat-view {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    min-height: 0;
-    margin: 0 auto;
-  }
-
-  .chat-page-layout {
-    flex: 1;
-    min-height: 0;
-    gap: 0.75rem;
-  }
-
-  .chat-page-layout .chat-layout {
-    height: auto;
-    min-height: 0;
-  }
-
-  .chat-messages {
-    min-height: 0;
-  }
-
-  .chat-form {
-    padding-top: 0.5rem;
-  }
-
-  .chat-error {
-    height: auto;
-    margin: 0;
-  }
-
-  /* Perfil compacto */
-
-  .t800-profile {
-    flex-direction: row;
-    align-items: center;
-    gap: 0.75rem;
-    flex-shrink: 0;
-  }
-
-  .t800-profile__avatar {
-    width: 68px;
-    height: 68px;
-    flex: 0 0 68px;
-  }
-
-  .t800-profile__crop {
-    border-radius: 50%;
-  }
-
-  .t800-profile__image {
-    object-position: right top;
-    transform: scale(1.40);
-    transform-origin: right top;
-  }
-
-  .online-status--desktop {
-    display: none;
-  }
-
-  .online-status--avatar {
-    position: absolute;
-    right: 1px;
-    bottom: 1px;
-    display: inline-block;
-    width: 15px;
-    height: 15px;
-    border: 2px solid #10151c;
-    background: #10151c;
-  }
-
-  .t800-profile__info {
-    flex: 1;
-    min-width: 0;
     padding: 0;
-  }
-
-  .t800-profile__info h2 {
-    font-size: 1.1rem;
-  }
-
-  .t800-profile__info .eyebrow {
-    font-size: 0.65rem;
-    margin: 0.25rem 0;
-    letter-spacing: 0.05rem;
-  }
-
-.t800-profile__info>p:not(.eyebrow) {
-    font-size: 0.75rem;
-    line-height: 1.3;
-    margin: 0;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    line-clamp: 2;
-    overflow: hidden;
-}
-
-  .t800-profile__details {
-    display: none;
-  }
-
-  /* Footer compacto */
-
-  .site-footer {
-    padding: 0.5rem;
-    gap: 0.4rem;
-    font-size: 0.75rem;
-  }
-
-  .site-footer p {
-    margin: 0 0 0.25rem;
-    line-height: 1.3;
-  }
-
-  .footer-logo {
-    width: 120px;
-  }
-
-  .footer-credits {
-    font-size: 0.7rem;
-  }
-
-  .social-links img {
-    width: 85px;
-  }
-
-  /* Home */
-
-  .view.home-view {
-    justify-content: flex-start;
-    gap: 0.5rem;
-    padding: 0.5rem 0;
-  }
-
-  .home-intro h1 {
-    font-size: 1.5rem;
-  }
-
-  .home-intro__logo {
-    width: 180px;
-  }
-
-  .home-lead {
-    font-size: 0.85rem;
-  }
-
-  .home-banner {
-    height: clamp(110px, 18dvh, 150px);
-    object-position: 62% 25%;
-  }
-
-  .home-features {
-    grid-template-columns: 1fr;
-    gap: 0.4rem;
-  }
-
-  .home-feature {
-    padding: 0.5rem 0.75rem;
-    gap: 0.65rem;
-  }
-
-  .home-feature h2 {
-    font-size: 0.85rem;
-    margin-bottom: 0.2rem;
-  }
-
-  .home-feature p {
-    font-size: 0.75rem;
-    line-height: 1.3;
-  }
-
-  .home-feature__number {
-    font-size: 0.9rem;
-  }
-
-  .view.home-view>.home-cta {
-    width: 100%;
-    padding: 0.75rem;
-  }
-}
-
-/* RESPONSIVE: TABLET Y ESCRITORIO (DESDE 768px) */
-
-@media (min-width: 768px) {
-  .site-header {
-    padding: 1.5rem 3rem;
-  }
-
-  main {
-    padding: 4rem 2rem;
+    overflow-y: visible;
   }
 
   h1 {
     font-size: 3rem;
+  }
+
+  /* Header horizontal */
+  .site-header {
+    flex-shrink: 1;
+    padding: 1.5rem 3rem;
+  }
+
+  .site-header__inner {
+    flex-direction: row;
+    gap: 1rem;
+  }
+
+  .brand {
+    justify-content: normal;
+  }
+
+  .brand__logo {
+    width: 280px;
+  }
+
+  .site-header nav {
+    justify-content: normal;
+    width: auto;
+    gap: 1rem;
+  }
+
+  /* Chat y perfil lateral */
+  .chat-view {
+    display: block;
+    height: auto;
+    min-height: auto;
+  }
+
+  .chat-page-layout {
+    flex-direction: row;
+    flex: 0 1 auto;
+    align-items: stretch;
+    min-height: auto;
+    gap: 1.5rem;
+  }
+
+  .chat-page-layout .chat-layout {
+    height: 65vh;
+    min-height: 350px;
+  }
+
+  .chat-messages {
+    min-height: auto;
   }
 
   .message,
@@ -871,21 +912,203 @@ main {
     max-width: 70%;
   }
 
-  .chat-page-layout {
-    flex-direction: row;
-    align-items: stretch;
+  .chat-form {
+    padding-top: 1rem;
+  }
+
+  .chat-error {
+    height: 2.75rem;
+    margin: 0.5rem;
   }
 
   .t800-profile {
     flex: 0 0 280px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
   }
 
   .t800-profile__avatar {
+    flex: 0 0 auto;
+    width: 100%;
     height: 300px;
+  }
+
+  .t800-profile__crop {
+    border-radius: 0;
+  }
+
+  .t800-profile__image {
+    object-position: center;
+    transform: none;
+    transform-origin: center;
+  }
+
+  .online-status--desktop {
+    display: inline-block;
+  }
+
+  .online-status--avatar {
+    display: none;
+  }
+
+  .t800-profile__info {
+    flex: 0 1 auto;
+    min-width: auto;
+    padding: 1rem;
+  }
+
+  .t800-profile__info h2 {
+    font-size: 1.5em;
+  }
+
+  .t800-profile__info .eyebrow {
+    margin: 0.5rem 0 1em;
+    font-size: 1rem;
+    letter-spacing: 0.15rem;
+  }
+
+  .t800-profile__info > p:not(.eyebrow) {
+    display: block;
+    margin: 1em 0;
+    overflow: visible;
+    font-size: 1rem;
+    line-height: 1.7;
+    -webkit-box-orient: initial;
+    -webkit-line-clamp: initial;
+    line-clamp: initial;
+  }
+
+  .t800-profile__details {
+    display: block;
+  }
+
+  /* Footer de tamaño regular */
+  .site-footer {
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+  }
+
+  .site-footer p {
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  .footer-logo {
+    width: 220px;
+  }
+
+  .footer-credits {
+    font-size: 0.8rem;
+  }
+
+  .social-links img {
+    width: 100px;
+  }
+
+  /* Home: tres tarjetas y banner amplio */
+  .view.home-view {
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 0;
+  }
+
+  .home-intro h1 {
+    font-size: clamp(1.8rem, 3vw, 2.75rem);
+  }
+
+  .home-intro__logo {
+    width: 240px;
+  }
+
+  .home-lead {
+    font-size: 1rem;
+  }
+
+  .home-banner {
+    height: clamp(200px, 35dvh, 420px);
+    object-position: center 25%;
+  }
+
+  .home-features {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .home-feature {
+    gap: 0.75rem;
+    padding: 1rem;
+  }
+
+  .home-feature__number {
+    font-size: 1.1rem;
+  }
+
+  .home-feature h2 {
+    margin-bottom: 0.4rem;
+    font-size: 1rem;
+  }
+
+  .home-feature p {
+    font-size: 0.85rem;
+    line-height: 1.4;
+  }
+
+  .view.home-view > .home-cta {
+    width: auto;
+    padding: 0.9rem 1.4rem;
+  }
+
+  /* About: dos columnas y enlaces horizontales */
+  .view.about-view {
+    gap: 1.25rem;
+    padding: 1rem 0;
+    overflow-y: auto;
+  }
+
+  .about-header h1 {
+    font-size: clamp(1.8rem, 3vw, 2.75rem);
+  }
+
+  .about-description {
+    font-size: 1rem;
+  }
+
+  .about-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .about-card {
+    padding: 1.25rem;
+  }
+
+  .about-card h2 {
+    font-size: 1.25rem;
+  }
+
+  .about-card p {
+    font-size: 0.9rem;
+  }
+
+  .about-technologies {
+    padding: 0;
+  }
+
+  .about-actions {
+    flex-direction: row;
+    gap: 1rem;
+  }
+
+  .about-actions a {
+    width: auto;
+    text-align: inherit;
   }
 }
 
-/* RESPONSIVE: ESCRITORIO CON ALTURA DESDE 720px */
+/* 10. TABLET Y ESCRITORIO ALTOS: VISTAS EN ALTURA DISPONIBLE
+   Se mantiene la condición existente (720px), sin max-width. */
 
 @media (min-width: 768px) and (min-height: 720px) {
   body {
@@ -939,214 +1162,7 @@ main {
   }
 }
 
-
-/* ABOUT */
-
-.view.about-view {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  justify-content: flex-start;
-  gap: 1.25rem;
-
-  height: 100%;
-  min-height: 0;
-  padding: 1rem 0;
-
-  overflow-y: auto;
-}
-
-.view.about-view {
-  width: 100%;
-  max-width: 840px;
-  margin: 0 auto;
-}
-
-.view.about-view::-webkit-scrollbar {
-  display: none;
-}
-
-/* Introducción */
-
-.about-header .eyebrow {
-  margin: 0;
-}
-
-.about-header h1 {
-  margin: 0.25rem 0;
-  font-size: clamp(1.8rem, 3vw, 2.75rem);
-}
-
-.about-description {
-  max-width: 750px;
-  margin: 0;
-  color: #bfc7cf;
-  line-height: 1.5;
-}
-
-/* Tarjetas */
-
-.about-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1rem;
-}
-
-.about-card {
-  padding: 1.25rem;
-  background-color: #202933;
-  border: 1px solid #39424c;
-  border-radius: 0.5rem;
-}
-
-.about-card__number {
-  color: #e34b4b;
-  font-family: "Rajdhani", sans-serif;
-  font-size: 1.25rem;
-  font-weight: 700;
-}
-
-.about-card h2 {
-  margin: 0.4rem 0;
-  font-size: 1.25rem;
-}
-
-.about-card p {
-  margin: 0;
-  color: #bfc7cf;
-  font-size: 0.9rem;
-  line-height: 1.5;
-}
-
-/* Tecnologías */
-
-.about-technologies {
-  width: 70%;
-  align-self: center;
-  margin-block: 2rem;
-}
-
-.about-technologies h2 {
-  margin: 0 0 2rem;
-  color: #e34b4b;
-  letter-spacing: .2rem;
-  border-bottom: 2px solid #b93030;
-  font-size: 1.15rem;
-  text-align: center;
-}
-
-.about-tech-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 1rem;
-  justify-items: center;
-  align-items: start;
-}
-
-.about-tech-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  text-align: center;
-}
-
-.about-tech-icon {
-  width: 52px;
-  height: 52px;
-  object-fit: contain;
-  display: block;
-}
-
-.about-tech-icon--light {
-  filter: invert(1);
-}
-
-.about-tech-item span {
-  font-size: 0.8rem;
-  color: #bfc7cf;
-  line-height: 1.3;
-}
-
-/* Enlaces */
-
-.about-actions {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
-.about-actions .button {
-  margin: 0;
-}
-
-.about-source {
-  display: inline-block;
-  padding: 0.9rem 1.4rem;
-  border: 1px solid #39424c;
-  border-radius: 0.4rem;
-  transition: border-color 0.2s ease,
-              color 0.2s ease;
-}
-
-.about-source:hover {
-  color: #e34b4b;
-  border-color: #e34b4b;
-}
-
-/* Mobile */
-
-@media (max-width: 767px) {
-  .view.about-view {
-    gap: 0.75rem;
-    padding: 0.5rem 0;
-  }
-
-  .about-header h1 {
-    font-size: 1.5rem;
-  }
-
-  .about-description {
-    font-size: 0.85rem;
-  }
-
-  .about-grid {
-    grid-template-columns: 1fr;
-    gap: 0.5rem;
-  }
-
-  .about-card {
-    padding: 0.75rem;
-  }
-
-  .about-card h2 {
-    font-size: 1rem;
-  }
-
-  .about-card p {
-    font-size: 0.8rem;
-  }
-
-  .about-technologies {
-    padding: 0.75rem;
-  }
-
-  .about-actions {
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .about-actions a {
-    width: 100%;
-    text-align: center;
-  }
-
-  .about-disclaimer {
-    font-size: 0.7rem;
-  }
-}
+/* ACCESIBILIDAD: MOVIMIENTO REDUCIDO */
 
 @media (prefers-reduced-motion: reduce) {
   .online-status::before,
