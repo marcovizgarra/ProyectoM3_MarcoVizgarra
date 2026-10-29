@@ -1,0 +1,12 @@
+{
+  "MD033": {
+    "allowed_elements": [
+      "details",
+      "summary",
+      "strong",
+      "h3",
+      "p",
+      "img"
+    ]
+  }
+}
