@@ -269,7 +269,6 @@ export function renderAbout() {
   `;
 }
 
-
 export function renderNotFound() {
   return `
     <section class="view">

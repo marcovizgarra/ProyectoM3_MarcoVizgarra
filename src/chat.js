@@ -57,11 +57,15 @@ export function renderChat() {
 
             <p>
               Organismo cibernético de Terminator 2:
-              Reprogramado para proteger a John Connor.
             </p>
 
             <dl class="t800-profile__details">
-              <div>
+            <div>
+                <dt>Misión</dt>
+                <dd>Proteger a John Connor</dd>
+            </div>
+            
+            <div>
                 <dt>Serie</dt>
                 <dd>T-800</dd>
               </div>
@@ -69,11 +73,6 @@ export function renderChat() {
               <div>
                 <dt>Modelo</dt>
                 <dd>Cyberdyne Systems Model 101</dd>
-              </div>
-
-              <div>
-                <dt>Misión</dt>
-                <dd>Proteger a John Connor</dd>
               </div>
             </dl>
           </div>
