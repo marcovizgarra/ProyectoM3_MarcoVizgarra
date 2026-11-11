@@ -13,16 +13,30 @@ export function renderHome() {
         </p>
       </div>
 
-      <img
-        src="/img/t800_banner_home.jpg"
-        alt="El T-800 sobre una motocicleta"
-        class="home-banner"
-        width="2048"
-        height="857"
-      />
+
+      <div class="home-visual">
+        <img
+          src="/img/t800_banner_home.jpg"
+          alt="El T-800 sobre una motocicleta"
+          class="home-banner"
+          width="2048"
+          height="857"
+        />
+      </div>
+
 
       <div class="home-features"
            aria-label="Características del sistema">
+
+        <div class="home-features__heading">
+          <span class="home-features__label">
+            CAPACIDADES DEL SISTEMA
+          </span>
+
+          <span class="home-features__status" aria-hidden="true">
+            SYSTEM READY
+          </span>
+        </div>
 
         <article class="home-feature">
           <span class="home-feature__number">01</span>
@@ -40,8 +54,8 @@ export function renderHome() {
           <div>
             <h2>IA conversacional</h2>
             <p>
-              Interactuá mediante respuestas generadas
-              con la API de Gemini.
+              Respuestas generadas dinámicamente
+              mediante Google Gemini.
             </p>
           </div>
         </article>
@@ -57,6 +71,17 @@ export function renderHome() {
           </div>
         </article>
 
+        <article class="home-feature">
+          <span class="home-feature__number">04</span>
+          <div>
+            <h2>Conexión segura</h2>
+            <p>
+              Integración serverless que protege
+              las credenciales de Gemini.
+            </p>
+          </div>
+        </article>
+
       </div>
 
       <a href="/chat"
@@ -68,8 +93,6 @@ export function renderHome() {
     </section>
   `;
 }
-
-
 
 export function renderAbout() {
   return `
